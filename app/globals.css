@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+@theme {
+  --color-boom-lavender: #d0bfdf;
+  --color-boom-lavender-soft: #eee7f3;
+  --color-boom-lavender-deep: #a78fba;
+  --color-boom-ink: #1a1b3a;
+  --color-boom-ink-soft: #292b53;
+  --color-boom-ivory: #f8f4ec;
+  --color-boom-white: #ffffff;
+
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  * {
+    border-color: color-mix(in srgb, var(--color-boom-ink) 14%, transparent);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-boom-ivory text-boom-ink font-body antialiased;
+  }
+
+  ::selection {
+    @apply bg-boom-ink text-boom-lavender;
+  }
+
+  :focus-visible {
+    outline: 3px solid #a78fba;
+    outline-offset: 4px;
+  }
+}
+
+@layer components {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .section-kicker {
+    @apply text-xs font-extrabold uppercase tracking-[0.2em];
+  }
+
+  .button-primary {
+    @apply inline-flex min-h-12 items-center justify-center rounded-full bg-boom-ink px-7 text-sm font-extrabold uppercase tracking-[0.12em] text-white transition duration-300 hover:-translate-y-0.5 hover:bg-boom-ink-soft;
+  }
+
+  .button-lavender {
+    @apply inline-flex min-h-12 items-center justify-center rounded-full bg-boom-lavender px-7 text-sm font-extrabold uppercase tracking-[0.12em] text-boom-ink transition duration-300 hover:-translate-y-0.5 hover:bg-white;
+  }
+
+  .button-outline-light {
+    @apply inline-flex min-h-12 items-center justify-center rounded-full border border-white/35 px-7 text-sm font-extrabold uppercase tracking-[0.12em] text-white transition duration-300 hover:-translate-y-0.5 hover:border-white hover:bg-white hover:text-boom-ink;
+  }
+
+  .form-input {
+    @apply h-12 w-full rounded-xl border border-white/18 bg-white/[0.07] px-4 text-sm text-white outline-none transition placeholder:text-white/38 focus:border-boom-lavender focus:bg-white/[0.1];
+  }
+
+  .form-textarea {
+    @apply w-full resize-none rounded-xl border border-white/18 bg-white/[0.07] px-4 py-3 text-sm leading-6 text-white outline-none transition placeholder:text-white/38 focus:border-boom-lavender focus:bg-white/[0.1];
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .content-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 800px;
+  }
+
+  .paper-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.07'/%3E%3C/svg%3E");
+  }
+}
+
+@keyframes loading-bar {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(65%);
+  }
+  100% {
+    transform: translateX(220%);
+  }
+}
+
+@keyframes hero-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
