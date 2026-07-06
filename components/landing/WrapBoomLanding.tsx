@@ -445,9 +445,28 @@ function DeliverySection({ phoneNumber }: { phoneNumber: string | null }) {
               </a>
             ) : null}
           </div>
+
+          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+            <InfoTile label="Lunes a jueves" value="11 a 23 hs" />
+            <InfoTile label="Viernes a domingo" value="11 a 23:30 hs" />
+            <InfoTile label="Feriados" value="11 a 23:30 hs" />
+          </div>
         </div>
       </div>
     </section>
+  );
+}
+
+function InfoTile({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-2xl border border-boom-ink/12 bg-white/36 p-4">
+      <p className="text-xs font-extrabold uppercase tracking-[0.15em] text-boom-ink/62">
+        {label}
+      </p>
+      <p className="mt-2 text-lg font-extrabold leading-tight text-boom-ink">
+        {value}
+      </p>
+    </div>
   );
 }
 
@@ -478,6 +497,15 @@ function ContactFooter({ phoneNumber }: { phoneNumber: string | null }) {
             Consultas generales, pedidos especiales o información comercial.
             Dejanos tus datos y te respondemos a la brevedad.
           </p>
+
+          <div className="mt-9">
+            <p className="section-kicker text-white/42">Horarios</p>
+            <p className="mt-3 text-sm leading-7 text-white/64">
+              Lunes a jueves de 11 a 23 hs.
+              <br />
+              Viernes, sábado, domingo y feriados de 11 a 23:30 hs.
+            </p>
+          </div>
 
           {phoneNumber ? (
             <div className="mt-9">
