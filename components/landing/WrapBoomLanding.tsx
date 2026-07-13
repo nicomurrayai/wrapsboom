@@ -6,6 +6,7 @@ import {
 } from "@/lib/lacarta";
 import { campaignAssets } from "@/lib/site-config";
 import { ContactInquiryForm } from "./ContactInquiryForm";
+import { ProductMedia } from "./ProductMedia";
 
 type WrapBoomLandingProps = {
   menuData: LacartaMenuData | null;
@@ -23,6 +24,15 @@ const priceFormatter = new Intl.NumberFormat("es-AR", {
   currency: "ARS",
   maximumFractionDigits: 0,
 });
+
+const menuCollator = new Intl.Collator("es", {
+  sensitivity: "base",
+  numeric: true,
+});
+
+const compatibleImageHosts = new Set([
+  "tvqzwrzwaadgbcczjmqs.supabase.co",
+]);
 
 const featuredCategories = [
   {
@@ -291,28 +301,7 @@ function ProductCard({ product }: { product: LacartaProduct }) {
 
   return (
     <article className="group overflow-hidden rounded-[1.4rem] border border-boom-ink/10 bg-white shadow-[0_18px_45px_rgba(26,27,58,0.07)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_55px_rgba(26,27,58,0.13)]">
-      <div className="relative aspect-[4/3] overflow-hidden bg-boom-lavender-soft">
-        {imageSrc ? (
-          <Image
-            src={imageSrc}
-            alt={product.name}
-            fill
-            unoptimized
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
-            className="object-cover transition duration-500 group-hover:scale-[1.035]"
-          />
-        ) : (
-          <div className="paper-noise relative flex h-full items-center justify-center bg-boom-lavender px-6 text-center">
-            <div
-              className="absolute h-36 w-36 rounded-full border-[22px] border-boom-ink/8"
-              aria-hidden="true"
-            />
-            <p className="relative font-display text-2xl font-extrabold uppercase text-boom-ink/68">
-              Wrap Boom
-            </p>
-          </div>
-        )}
-      </div>
+      <ProductMedia src={imageSrc} alt={product.name} />
 
       <div className="p-5">
         <div className="flex items-start justify-between gap-3">
@@ -608,58 +597,95 @@ function groupProducts(
   }
 
   const categories = Array.from(grouped.keys());
-  const orderedCategories =
-    categoryOrder && categoryOrder.length > 0
-      ? [
-          ...categoryOrder.filter((category) => grouped.has(category)),
-          ...categories.filter((category) => !categoryOrder.includes(category)),
-        ]
-      : categories;
+  const configuredCategories = Array.from(new Set(categoryOrder ?? [])).filter(
+    (category) => grouped.has(category),
+  );
+  const configuredCategorySet = new Set(configuredCategories);
+  const remainingCategories = categories
+    .filter((category) => !configuredCategorySet.has(category))
+    .sort(menuCollator.compare);
+  const orderedCategories = [
+    ...configuredCategories,
+    ...remainingCategories,
+  ];
 
   return orderedCategories.map((category) => ({
     category,
     id: slugify(category),
-    products: grouped.get(category) ?? [],
+    products: [...(grouped.get(category) ?? [])].sort(compareProducts),
   }));
 }
 
 function getProductImage(product: LacartaProduct) {
-  let imageUrl: string | null = null;
+  if (product.contentType?.toLowerCase().startsWith("image/")) {
+    const contentUrl = getCompatibleImageUrl(product.contentUrl);
 
-  if (
-    product.contentType?.startsWith("image") &&
-    product.contentUrl?.startsWith("http")
-  ) {
-    imageUrl = product.contentUrl;
-  } else if (product.thumbnail?.startsWith("http")) {
-    imageUrl = product.thumbnail;
+    if (contentUrl) {
+      return contentUrl;
+    }
   }
 
-  return imageUrl ? getSupabaseImageUrl(imageUrl) : null;
+  return getCompatibleImageUrl(product.thumbnail);
 }
 
-function getSupabaseImageUrl(value: string) {
+function getCompatibleImageUrl(value?: string | null) {
+  if (!value) {
+    return null;
+  }
+
   try {
     const url = new URL(value);
+    const usesSupportedProtocol =
+      url.protocol === "http:" || url.protocol === "https:";
+    const isPlaceholder = url.pathname
+      .toLowerCase()
+      .endsWith("/image-placeholder.webp");
 
     if (
-      url.hostname === "tvqzwrzwaadgbcczjmqs.supabase.co" &&
-      url.pathname.includes("/storage/v1/object/public/")
+      !usesSupportedProtocol ||
+      !compatibleImageHosts.has(url.hostname) ||
+      isPlaceholder ||
+      url.username ||
+      url.password ||
+      url.port
     ) {
-      url.pathname = url.pathname.replace(
-        "/storage/v1/object/public/",
-        "/storage/v1/render/image/public/",
-      );
-      url.searchParams.set("width", "720");
-      url.searchParams.set("height", "540");
-      url.searchParams.set("quality", "72");
-      url.searchParams.set("resize", "cover");
+      return null;
     }
 
+    url.protocol = "https:";
     return url.toString();
   } catch {
-    return value;
+    return null;
   }
+}
+
+function compareProducts(a: LacartaProduct, b: LacartaProduct) {
+  const orderA = getFiniteOrder(a.order);
+  const orderB = getFiniteOrder(b.order);
+
+  if (orderA !== null && orderB === null) {
+    return -1;
+  }
+
+  if (orderA === null && orderB !== null) {
+    return 1;
+  }
+
+  if (orderA !== null && orderB !== null && orderA !== orderB) {
+    return orderA - orderB;
+  }
+
+  const nameComparison = menuCollator.compare(a.name, b.name);
+
+  if (nameComparison !== 0) {
+    return nameComparison;
+  }
+
+  return a._id < b._id ? -1 : a._id > b._id ? 1 : 0;
+}
+
+function getFiniteOrder(order?: number | null) {
+  return typeof order === "number" && Number.isFinite(order) ? order : null;
 }
 
 function slugify(value: string) {

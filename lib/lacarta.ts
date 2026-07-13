@@ -53,9 +53,7 @@ const getMenuDataBySlug = makeFunctionReference<
 >("businesses:getMenuDataBySlug");
 
 export async function getLacartaMenuData(): Promise<MenuDataResult> {
-  const convexUrl =
-    process.env.NEXT_PUBLIC_LACARTA_CONVEX_URL ??
-    process.env.NEXT_PUBLIC_CONVEX_URL;
+  const convexUrl = process.env.NEXT_PUBLIC_LACARTA_CONVEX_URL;
 
   if (!convexUrl) {
     return {
