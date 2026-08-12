@@ -31,6 +31,7 @@ const menuCollator = new Intl.Collator("es", {
 });
 
 const compatibleImageHosts = new Set([
+  "cdn.lacartaa.com",
   "tvqzwrzwaadgbcczjmqs.supabase.co",
 ]);
 
