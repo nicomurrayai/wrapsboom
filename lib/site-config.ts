@@ -42,7 +42,7 @@ export const siteConfig = {
       },
       { label: "Por qué Wrap", href: "#beneficios" },
       { label: "Cómo pedir", href: "#delivery" },
-      { label: "Contacto", href: "#contacto" },
+      { label: "Franquicias", href: "#franquicias" },
       {
         label: "Pedí online",
         href: orderUrl,

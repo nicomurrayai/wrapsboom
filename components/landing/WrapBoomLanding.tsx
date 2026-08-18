@@ -50,7 +50,7 @@ export function WrapBoomLanding({ menuData }: WrapBoomLandingProps) {
       <FeaturedCategories whatsappUrl={whatsappUrl} />
       <BenefitsSection />
       <DeliverySection phoneNumber={phoneNumber} />
-      <ContactFooter phoneNumber={phoneNumber} />
+      <ContactFooter />
     </>
   );
 }
@@ -330,47 +330,44 @@ function OrderStep({ number, label }: { number: string; label: string }) {
   );
 }
 
-function ContactFooter({ phoneNumber }: { phoneNumber: string | null }) {
+function ContactFooter() {
   return (
     <section
-      id="contacto"
+      id="franquicias"
       className="silhouette-field silhouette-field-dark section-shell scroll-mt-24 overflow-hidden bg-[#11122a] text-white"
     >
-      <div className="relative z-10 mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-start lg:gap-10">
+      <span id="contacto" className="block scroll-mt-24" aria-hidden="true" />
+      <div className="relative z-10 mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
         <div>
-          <p className="section-kicker text-boom-lavender">Contacto</p>
+          <p className="section-kicker text-boom-lavender">Franquicias</p>
           <h2 className="section-title text-white">
-            Hablemos de tu próximo Boom.
+            Abrí tu próximo Wrap Boom.
           </h2>
-          <p className="mt-4 max-w-xl text-base leading-7 text-white/64">
-            Consultas generales, pedidos especiales o información comercial.
-            Dejanos tus datos y te respondemos a la brevedad.
+          <p className="mt-5 max-w-xl text-lg leading-8 text-white/68">
+            Contanos dónde te gustaría llevar la marca y conocé nuestra
+            propuesta de franquicias. El equipo comercial te acompaña en cada
+            paso.
           </p>
 
-          <div className="mt-6">
-            <p className="section-kicker text-white/42">Horarios</p>
-            <p className="mt-3 text-sm leading-7 text-white/64">
-              Lunes a jueves de 11 a 23 hs.
-              <br />
-              Viernes, sábado, domingo y feriados de 11 a 23:30 hs.
-            </p>
-          </div>
-
-          {phoneNumber ? (
-            <div className="mt-6">
-              <p className="section-kicker text-white/42">Teléfono</p>
-              <a
-                href={`tel:+${digitsOnly(phoneNumber)}`}
-                className="mt-3 inline-flex items-center gap-3 font-display text-2xl font-extrabold text-boom-lavender transition hover:text-white"
-              >
-                <PhoneIcon />
-                {formatPhone(phoneNumber)}
-              </a>
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
+            <div>
+              <p className="section-kicker text-boom-lavender">Una marca lista para crecer</p>
+              <p className="mt-3 text-sm leading-7 text-white/68">
+                Una propuesta ágil y reconocible, con productos frescos y una
+                operación pensada para el ritmo urbano.
+              </p>
             </div>
-          ) : null}
+            <div>
+              <p className="section-kicker text-boom-lavender">Próximo paso</p>
+              <p className="mt-3 text-sm leading-7 text-white/68">
+                Completá el formulario con la ubicación de interés y nos
+                contactaremos para conversar sobre la oportunidad.
+              </p>
+            </div>
+          </div>
         </div>
 
-        <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.055] p-5 shadow-[0_22px_65px_rgba(0,0,0,0.24)] backdrop-blur-sm sm:p-6">
+        <div className="rounded-lg border border-white/10 bg-white/[0.055] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.32)] backdrop-blur-sm sm:p-8">
           <ContactInquiryForm />
         </div>
       </div>

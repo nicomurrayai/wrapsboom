@@ -66,11 +66,11 @@
   }
 
   .form-input {
-    @apply h-11 w-full rounded-xl border border-white/18 bg-white/[0.07] px-4 text-sm text-white outline-none transition placeholder:text-white/38 focus:border-boom-lavender focus:bg-white/[0.1];
+    @apply h-12 w-full rounded-md border border-white/18 bg-white/[0.07] px-4 text-sm text-white outline-none transition placeholder:text-white/38 focus:border-boom-lavender focus:bg-white/[0.1];
   }
 
   .form-textarea {
-    @apply w-full resize-none rounded-xl border border-white/18 bg-white/[0.07] px-4 py-3 text-sm leading-6 text-white outline-none transition placeholder:text-white/38 focus:border-boom-lavender focus:bg-white/[0.1];
+    @apply w-full resize-none rounded-md border border-white/18 bg-white/[0.07] px-4 py-3 text-sm leading-6 text-white outline-none transition placeholder:text-white/38 focus:border-boom-lavender focus:bg-white/[0.1];
   }
 }
 
