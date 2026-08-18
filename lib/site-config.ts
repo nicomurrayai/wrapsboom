@@ -36,10 +36,6 @@ export const siteConfig = {
   },
   nav: {
     links: [
-      {
-        label: "Productos",
-        href: "#antojos",
-      },
       { label: "Por qué Wrap", href: "#beneficios" },
       { label: "Cómo pedir", href: "#delivery" },
       { label: "Franquicias", href: "#franquicias" },
