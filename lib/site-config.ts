@@ -24,7 +24,7 @@ export const campaignAssets = {
   signature: "/hero-signature.webp",
   veggie: "/hero-veggie.webp",
   combo: "/hero-combo.webp",
-  delivery: "/hero-delivery.webp",
+  delivery: "/hero-delivery-branded.png",
 } as const;
 
 const orderUrl = "https://www.lacartaa.com/wraps-boom-1";
