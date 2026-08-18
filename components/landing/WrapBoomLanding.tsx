@@ -2,38 +2,16 @@ import Image from "next/image";
 import {
   LACARTA_MENU_URL,
   type LacartaMenuData,
-  type LacartaProduct,
 } from "@/lib/lacarta";
 import { campaignAssets } from "@/lib/site-config";
 import { ContactInquiryForm } from "./ContactInquiryForm";
-import { ProductMedia } from "./ProductMedia";
 
 type WrapBoomLandingProps = {
   menuData: LacartaMenuData | null;
-  error: string | null;
 };
 
-type ProductGroup = {
-  category: string;
-  id: string;
-  products: LacartaProduct[];
-};
-
-const priceFormatter = new Intl.NumberFormat("es-AR", {
-  style: "currency",
-  currency: "ARS",
-  maximumFractionDigits: 0,
-});
-
-const menuCollator = new Intl.Collator("es", {
-  sensitivity: "base",
-  numeric: true,
-});
-
-const compatibleImageHosts = new Set([
-  "cdn.lacartaa.com",
-  "tvqzwrzwaadgbcczjmqs.supabase.co",
-]);
+const fallbackWhatsAppNumber = "5491164955664";
+const whatsappMessage = "Hola, quiero hacer un pedido en Wrap Boom.";
 
 const featuredCategories = [
   {
@@ -41,7 +19,6 @@ const featuredCategories = [
     title: "Wraps",
     copy: "Clásicos, veggie y combinaciones con identidad propia.",
     image: campaignAssets.signature,
-    href: "#wraps",
     className: "lg:col-span-6",
     imageClassName: "object-center",
   },
@@ -50,7 +27,6 @@ const featuredCategories = [
     title: "Combos",
     copy: "Una comida completa, sin darle más vueltas.",
     image: campaignAssets.combo,
-    href: "#combos",
     className: "lg:col-span-3",
     imageClassName: "object-center",
   },
@@ -59,33 +35,27 @@ const featuredCategories = [
     title: "Ensaladas",
     copy: "Color, textura y opciones para elegir distinto.",
     image: campaignAssets.veggie,
-    href: "#ensaladas",
     className: "lg:col-span-3",
     imageClassName: "object-left",
   },
 ] as const;
 
-export function WrapBoomLanding({ menuData, error }: WrapBoomLandingProps) {
-  const products = menuData?.products ?? [];
-  const visibleProducts = products.filter((product) => product.show !== false);
-  const groups = groupProducts(
-    visibleProducts,
-    menuData?.business.categoryOrder,
-  );
+export function WrapBoomLanding({ menuData }: WrapBoomLandingProps) {
+  const phoneNumber = menuData?.business.phoneNumber ?? null;
+  const whatsappUrl = getWhatsAppUrl(phoneNumber);
 
   return (
     <>
-      <BrandIntro productCount={visibleProducts.length} />
-      <FeaturedCategories />
-      <ProductMenu groups={groups} products={visibleProducts} error={error} />
+      <BrandIntro />
+      <FeaturedCategories whatsappUrl={whatsappUrl} />
       <BenefitsSection />
-      <DeliverySection phoneNumber={menuData?.business.phoneNumber ?? null} />
-      <ContactFooter phoneNumber={menuData?.business.phoneNumber ?? null} />
+      <DeliverySection phoneNumber={phoneNumber} />
+      <ContactFooter phoneNumber={phoneNumber} />
     </>
   );
 }
 
-function BrandIntro({ productCount }: { productCount: number }) {
+function BrandIntro() {
   return (
     <section className="paper-noise silhouette-field section-shell overflow-hidden bg-boom-lavender text-boom-ink">
       <div
@@ -115,8 +85,8 @@ function BrandIntro({ productCount }: { productCount: number }) {
             para acompañarte cuando aparece el hambre.
           </p>
           <div className="mt-6 flex flex-col gap-2.5 sm:flex-row">
-            <a href="#menu" className="button-primary">
-              Explorar la carta
+            <a href="#antojos" className="button-primary">
+              Ver opciones
             </a>
             <a
               href={LACARTA_MENU_URL}
@@ -128,9 +98,7 @@ function BrandIntro({ productCount }: { productCount: number }) {
             </a>
           </div>
           <p className="mt-4 text-[0.68rem] font-extrabold uppercase tracking-[0.15em] text-boom-ink/46">
-            {productCount > 0
-              ? `${productCount} opciones disponibles hoy`
-              : "Carta online disponible"}
+            Pedidos online y por WhatsApp
           </p>
         </div>
       </div>
@@ -138,9 +106,12 @@ function BrandIntro({ productCount }: { productCount: number }) {
   );
 }
 
-function FeaturedCategories() {
+function FeaturedCategories({ whatsappUrl }: { whatsappUrl: string }) {
   return (
-    <section className="silhouette-field silhouette-field-dark section-shell overflow-hidden bg-boom-ink text-white">
+    <section
+      id="antojos"
+      className="silhouette-field silhouette-field-dark section-shell scroll-mt-24 overflow-hidden bg-boom-ink text-white"
+    >
       <div className="relative z-10 mx-auto max-w-7xl">
         <div className="max-w-3xl">
           <p className="section-kicker text-boom-lavender">
@@ -153,7 +124,11 @@ function FeaturedCategories() {
 
         <div className="mt-8 grid gap-4 lg:grid-cols-12">
           {featuredCategories.map((category) => (
-            <FeaturedCategoryCard key={category.title} {...category} />
+            <FeaturedCategoryCard
+              key={category.title}
+              {...category}
+              whatsappUrl={whatsappUrl}
+            />
           ))}
         </div>
       </div>
@@ -166,10 +141,10 @@ function FeaturedCategoryCard({
   title,
   copy,
   image,
-  href,
+  whatsappUrl,
   className,
   imageClassName,
-}: (typeof featuredCategories)[number]) {
+}: (typeof featuredCategories)[number] & { whatsappUrl: string }) {
   return (
     <article
       className={`group relative min-h-[360px] overflow-hidden rounded-[1.5rem] border border-white/12 bg-boom-lavender shadow-[0_16px_40px_rgba(0,0,0,0.18)] transition duration-300 hover:-translate-y-1 ${className}`}
@@ -194,129 +169,14 @@ function FeaturedCategoryCard({
           {copy}
         </p>
         <a
-          href={href}
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
           className="mt-4 inline-flex w-fit items-center gap-2 rounded-full bg-boom-lavender px-4 py-2.5 text-xs font-extrabold tracking-[0.025em] text-boom-ink transition hover:gap-3 hover:bg-white"
         >
           Ver opciones
-          <ArrowDownIcon />
+          <ArrowUpRightIcon />
         </a>
-      </div>
-    </article>
-  );
-}
-
-function ProductMenu({
-  groups,
-  products,
-  error,
-}: {
-  groups: ProductGroup[];
-  products: LacartaProduct[];
-  error: string | null;
-}) {
-  return (
-    <section
-      id="menu"
-      className="silhouette-field section-shell scroll-mt-24 overflow-hidden bg-boom-ivory text-boom-ink"
-    >
-      <div className="relative z-10 mx-auto max-w-7xl">
-        <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
-          <div>
-            <p className="section-kicker text-boom-lavender-deep">
-              La carta completa
-            </p>
-            <h2 className="section-title">
-              Elegí sin vueltas.
-            </h2>
-          </div>
-          <p className="max-w-2xl text-base font-medium leading-7 text-boom-ink/62 lg:ml-auto">
-            Navegá por categorías y encontrá wraps, ensaladas, combos, postres,
-            salsas y bebidas. Los productos y precios se actualizan directamente
-            desde nuestra carta.
-          </p>
-        </div>
-
-        {error ? (
-          <MenuError />
-        ) : products.length === 0 ? (
-          <EmptyMenu />
-        ) : (
-          <>
-            <nav
-              className="mt-7 flex gap-2 overflow-x-auto pb-3"
-              aria-label="Categorías de la carta"
-            >
-              {groups.map((group) => (
-                <a
-                  key={group.category}
-                  href={`#${group.id}`}
-                  className="shrink-0 rounded-full border border-boom-ink/12 bg-white/85 px-4 py-2 text-xs font-extrabold tracking-[0.02em] text-boom-ink/68 shadow-sm transition hover:-translate-y-0.5 hover:border-boom-ink/30 hover:bg-boom-lavender hover:text-boom-ink"
-                >
-                  {group.category}
-                </a>
-              ))}
-            </nav>
-
-            <div className="mt-8 space-y-14 md:space-y-16">
-              {groups.map((group) => (
-                <section
-                  key={group.category}
-                  id={group.id}
-                  className="content-auto scroll-mt-28"
-                >
-                  <div className="mb-5 flex flex-col gap-3 border-b border-boom-ink/10 pb-4 sm:flex-row sm:items-end sm:justify-between">
-                    <div>
-                      <p className="section-kicker text-boom-lavender-deep">
-                        {group.products.length} opciones
-                      </p>
-                      <h3 className="mt-1.5 font-display text-3xl font-bold leading-none tracking-[-0.035em] sm:text-4xl">
-                        {group.category}
-                      </h3>
-                    </div>
-                    <a
-                      href={LACARTA_MENU_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="button-primary w-fit"
-                    >
-                      Pedir
-                    </a>
-                  </div>
-                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                    {group.products.map((product) => (
-                      <ProductCard key={product._id} product={product} />
-                    ))}
-                  </div>
-                </section>
-              ))}
-            </div>
-          </>
-        )}
-      </div>
-    </section>
-  );
-}
-
-function ProductCard({ product }: { product: LacartaProduct }) {
-  const imageSrc = getProductImage(product);
-
-  return (
-    <article className="group overflow-hidden rounded-[1.25rem] border border-boom-ink/10 bg-white/95 shadow-[0_10px_28px_rgba(26,27,58,0.065)] transition duration-300 hover:-translate-y-1 hover:border-boom-lavender-deep/35 hover:shadow-[0_18px_38px_rgba(26,27,58,0.12)]">
-      <ProductMedia src={imageSrc} alt={product.name} />
-
-      <div className="p-4">
-        <div className="flex items-start justify-between gap-3">
-          <h4 className="text-base font-extrabold leading-snug text-boom-ink">
-            {product.name}
-          </h4>
-          <p className="shrink-0 rounded-full bg-boom-lavender px-2.5 py-1 text-[0.8rem] font-extrabold text-boom-ink">
-            {priceFormatter.format(product.price)}
-          </p>
-        </div>
-        <p className="mt-2 line-clamp-3 min-h-[3.9rem] text-[0.82rem] leading-[1.3rem] text-boom-ink/58">
-          {product.description?.trim() ||
-            "Preparado con el sello fresco y sabroso de Wrap Boom."}
-        </p>
       </div>
     </article>
   );
@@ -548,153 +408,9 @@ function ContactFooter({ phoneNumber }: { phoneNumber: string | null }) {
   );
 }
 
-function MenuError() {
-  return (
-    <div className="mt-8 rounded-[1.35rem] border border-boom-ink/12 bg-boom-lavender-soft p-6 sm:p-7">
-      <p className="font-display text-2xl font-bold tracking-[-0.025em]">
-        La carta se está actualizando.
-      </p>
-      <p className="mt-3 max-w-xl text-sm leading-6 text-boom-ink/62">
-        Mientras vuelve la conexión, podés abrir el menú online y continuar tu
-        pedido desde LaCarta.
-      </p>
-      <a
-        href={LACARTA_MENU_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="button-primary mt-6"
-      >
-        Abrir menú online
-      </a>
-    </div>
-  );
-}
-
-function EmptyMenu() {
-  return (
-    <div className="mt-8 rounded-[1.35rem] border border-boom-ink/12 bg-white p-6 sm:p-7">
-      <p className="font-display text-2xl font-bold tracking-[-0.025em]">
-        No hay productos disponibles.
-      </p>
-      <p className="mt-3 max-w-xl text-sm leading-6 text-boom-ink/62">
-        La carta puede estar recibiendo cambios. Volvé a intentar en unos
-        minutos.
-      </p>
-    </div>
-  );
-}
-
-function groupProducts(
-  products: LacartaProduct[],
-  categoryOrder?: string[] | null,
-): ProductGroup[] {
-  const grouped = new Map<string, LacartaProduct[]>();
-
-  for (const product of products) {
-    const group = grouped.get(product.category) ?? [];
-    group.push(product);
-    grouped.set(product.category, group);
-  }
-
-  const categories = Array.from(grouped.keys());
-  const configuredCategories = Array.from(new Set(categoryOrder ?? [])).filter(
-    (category) => grouped.has(category),
-  );
-  const configuredCategorySet = new Set(configuredCategories);
-  const remainingCategories = categories
-    .filter((category) => !configuredCategorySet.has(category))
-    .sort(menuCollator.compare);
-  const orderedCategories = [
-    ...configuredCategories,
-    ...remainingCategories,
-  ];
-
-  return orderedCategories.map((category) => ({
-    category,
-    id: slugify(category),
-    products: [...(grouped.get(category) ?? [])].sort(compareProducts),
-  }));
-}
-
-function getProductImage(product: LacartaProduct) {
-  if (product.contentType?.toLowerCase().startsWith("image/")) {
-    const contentUrl = getCompatibleImageUrl(product.contentUrl);
-
-    if (contentUrl) {
-      return contentUrl;
-    }
-  }
-
-  return getCompatibleImageUrl(product.thumbnail);
-}
-
-function getCompatibleImageUrl(value?: string | null) {
-  if (!value) {
-    return null;
-  }
-
-  try {
-    const url = new URL(value);
-    const usesSupportedProtocol =
-      url.protocol === "http:" || url.protocol === "https:";
-    const isPlaceholder = url.pathname
-      .toLowerCase()
-      .endsWith("/image-placeholder.webp");
-
-    if (
-      !usesSupportedProtocol ||
-      !compatibleImageHosts.has(url.hostname) ||
-      isPlaceholder ||
-      url.username ||
-      url.password ||
-      url.port
-    ) {
-      return null;
-    }
-
-    url.protocol = "https:";
-    return url.toString();
-  } catch {
-    return null;
-  }
-}
-
-function compareProducts(a: LacartaProduct, b: LacartaProduct) {
-  const orderA = getFiniteOrder(a.order);
-  const orderB = getFiniteOrder(b.order);
-
-  if (orderA !== null && orderB === null) {
-    return -1;
-  }
-
-  if (orderA === null && orderB !== null) {
-    return 1;
-  }
-
-  if (orderA !== null && orderB !== null && orderA !== orderB) {
-    return orderA - orderB;
-  }
-
-  const nameComparison = menuCollator.compare(a.name, b.name);
-
-  if (nameComparison !== 0) {
-    return nameComparison;
-  }
-
-  return a._id < b._id ? -1 : a._id > b._id ? 1 : 0;
-}
-
-function getFiniteOrder(order?: number | null) {
-  return typeof order === "number" && Number.isFinite(order) ? order : null;
-}
-
-function slugify(value: string) {
-  return value
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
+function getWhatsAppUrl(phoneNumber: string | null) {
+  const number = digitsOnly(phoneNumber ?? "") || fallbackWhatsAppNumber;
+  return `https://wa.me/${number}?text=${encodeURIComponent(whatsappMessage)}`;
 }
 
 function digitsOnly(value: string) {
@@ -711,7 +427,7 @@ function formatPhone(value: string) {
   return `+${digits}`;
 }
 
-function ArrowDownIcon() {
+function ArrowUpRightIcon() {
   return (
     <svg
       className="h-4 w-4"
@@ -723,7 +439,7 @@ function ArrowDownIcon() {
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <path d="M12 5v14M6 13l6 6 6-6" />
+      <path d="M7 17 17 7M8 7h9v9" />
     </svg>
   );
 }

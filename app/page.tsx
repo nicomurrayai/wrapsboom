@@ -7,13 +7,13 @@ import { getLacartaMenuData } from "@/lib/lacarta";
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const { menuData, error } = await getLacartaMenuData();
+  const { menuData } = await getLacartaMenuData();
 
   return (
     <main>
       <Navbar />
       <HeroSlider />
-      <WrapBoomLanding menuData={menuData} error={error} />
+      <WrapBoomLanding menuData={menuData} />
       <OrderFab />
     </main>
   );

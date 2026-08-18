@@ -38,13 +38,7 @@ export const siteConfig = {
     links: [
       {
         label: "Productos",
-        href: "#menu",
-        children: [
-          { label: "Wraps", href: "#wraps" },
-          { label: "Ensaladas", href: "#ensaladas" },
-          { label: "Combos", href: "#combos" },
-          { label: "Postres", href: "#postres" },
-        ],
+        href: "#antojos",
       },
       { label: "Por qué Wrap", href: "#beneficios" },
       { label: "Cómo pedir", href: "#delivery" },
@@ -65,7 +59,7 @@ export const siteConfig = {
       contentAlign: "left",
       ctas: [
         { label: "Pedí online", href: orderUrl, variant: "primary" },
-        { label: "Ver la carta", href: "#menu", variant: "outline" },
+        { label: "Ver opciones", href: "#antojos", variant: "outline" },
       ],
     },
     {
@@ -75,7 +69,7 @@ export const siteConfig = {
       subtitle: "Una mezcla liviana, abundante y llena de textura.",
       contentAlign: "right",
       ctas: [
-        { label: "Ver wraps", href: "#wraps", variant: "primary" },
+        { label: "Ver opciones", href: "#antojos", variant: "primary" },
         { label: "Pedí online", href: orderUrl, variant: "outline" },
       ],
     },
@@ -86,8 +80,8 @@ export const siteConfig = {
       subtitle: "Wrap, ensalada y ese antojo que no necesitaba explicación.",
       contentAlign: "left",
       ctas: [
-        { label: "Ver combos", href: "#combos", variant: "primary" },
-        { label: "Explorar carta", href: "#menu", variant: "outline" },
+        { label: "Ver opciones", href: "#antojos", variant: "primary" },
+        { label: "Pedí online", href: orderUrl, variant: "outline" },
       ],
     },
     {
