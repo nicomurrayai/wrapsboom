@@ -16,7 +16,7 @@ export function ProductMedia({ src, alt }: ProductMediaProps) {
   const imageSrc = src && failedSrc !== src ? src : null;
 
   return (
-    <div className="relative aspect-[4/5] overflow-hidden bg-boom-lavender-soft">
+    <div className="relative aspect-square overflow-hidden bg-boom-lavender-soft">
       {imageSrc ? (
         <>
           <Image
@@ -37,7 +37,7 @@ export function ProductMedia({ src, alt }: ProductMediaProps) {
             alt={alt}
             fill
             sizes={productImageSizes}
-            className="z-10 scale-[0.96] object-contain transition-transform duration-500 group-hover:scale-100 motion-reduce:transition-none motion-reduce:group-hover:scale-[0.96]"
+            className="z-10 scale-[0.94] object-contain transition-transform duration-500 group-hover:scale-[0.98] motion-reduce:transition-none motion-reduce:group-hover:scale-[0.94]"
             onError={() => setFailedSrc(imageSrc)}
           />
         </>

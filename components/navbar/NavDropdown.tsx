@@ -28,7 +28,7 @@ export function NavDropdown({
               ? "button-lavender mt-2 w-full"
               : "text-lg font-bold text-white transition-colors hover:text-boom-lavender"
             : link.highlight
-              ? "rounded-full bg-boom-lavender px-5 py-2.5 text-xs font-extrabold uppercase tracking-[0.12em] text-boom-ink transition hover:bg-white"
+              ? "rounded-full bg-boom-lavender px-4 py-2.5 text-xs font-extrabold tracking-[0.025em] text-boom-ink transition hover:-translate-y-0.5 hover:bg-white"
               : "text-sm font-bold text-white transition-colors hover:text-boom-lavender"
         }
       />
@@ -96,7 +96,7 @@ export function NavDropdown({
             : "invisible -translate-y-1 opacity-0"
         }`}
       >
-        <div className="overflow-hidden rounded-2xl border border-white/12 bg-boom-ink p-1.5 shadow-2xl">
+        <div className="overflow-hidden rounded-[1.1rem] border border-white/12 bg-boom-ink p-1.5 shadow-2xl">
           {link.children.map((child) => (
             <Link
               key={child.href}

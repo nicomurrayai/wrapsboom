@@ -11,7 +11,7 @@ export function HeroSlide({ slide, priority = false }: HeroSlideProps) {
   const alignRight = slide.contentAlign === "right";
 
   return (
-    <article className="relative min-h-[740px] w-full flex-[0_0_100%] overflow-hidden">
+    <article className="relative min-h-[620px] w-full flex-[0_0_100%] overflow-hidden sm:min-h-[650px] lg:min-h-[680px]">
       <Image
         src={slide.image}
         alt=""
@@ -24,9 +24,9 @@ export function HeroSlide({ slide, priority = false }: HeroSlideProps) {
 
       <div className="paper-noise absolute inset-0 opacity-25" aria-hidden="true" />
 
-      <div className="relative z-10 mx-auto flex min-h-[740px] max-w-[1440px] items-end px-4 pb-28 pt-32 sm:px-6 md:items-center md:pb-24 lg:px-10">
+      <div className="relative z-10 mx-auto flex min-h-[620px] max-w-[1440px] items-end px-4 pb-20 pt-28 sm:min-h-[650px] sm:px-6 md:items-center md:pb-16 md:pt-28 lg:min-h-[680px] lg:px-10">
         <div
-          className={`relative max-w-[620px] overflow-hidden rounded-[2rem] border border-white/15 bg-boom-ink/94 p-6 text-white shadow-[0_30px_90px_rgba(26,27,58,0.34)] backdrop-blur-sm sm:p-9 md:p-11 ${
+          className={`relative w-full max-w-[550px] overflow-hidden rounded-[1.6rem] border border-white/15 bg-boom-ink/[0.91] p-6 text-white shadow-[0_24px_70px_rgba(26,27,58,0.3)] backdrop-blur-md sm:p-8 ${
             alignRight ? "md:ml-auto" : ""
           }`}
         >
@@ -35,19 +35,19 @@ export function HeroSlide({ slide, priority = false }: HeroSlideProps) {
             aria-hidden="true"
           />
           <div className="relative animate-[hero-reveal_600ms_ease-out_both]">
-            <span className="inline-flex rounded-full bg-boom-lavender px-4 py-2 text-[0.7rem] font-extrabold uppercase tracking-[0.2em] text-boom-ink">
+            <span className="inline-flex rounded-full bg-boom-lavender px-3.5 py-1.5 text-[0.65rem] font-extrabold uppercase tracking-[0.16em] text-boom-ink">
               {slide.badge}
             </span>
 
-            <h1 className="mt-5 max-w-xl font-display text-[clamp(2.75rem,6vw,5.7rem)] font-extrabold uppercase leading-[0.88] tracking-[-0.055em] text-balance">
+            <h1 className="mt-4 max-w-xl font-display text-[clamp(2.5rem,5vw,4.45rem)] font-bold leading-[0.93] tracking-[-0.045em] text-balance">
               {slide.title}
             </h1>
 
-            <p className="mt-5 max-w-lg text-base font-medium leading-7 text-white/76 sm:text-lg">
+            <p className="mt-4 max-w-lg text-[0.95rem] font-medium leading-6 text-white/76 sm:text-base sm:leading-7">
               {slide.subtitle}
             </p>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-6 flex flex-col gap-2.5 sm:flex-row">
               {slide.ctas.map((cta) => {
                 const className =
                   cta.variant === "primary"

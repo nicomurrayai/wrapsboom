@@ -40,7 +40,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
       />
       <div
         id="mobile-menu"
-        className={`fixed right-0 top-0 z-[60] flex h-full w-[min(100%,360px)] flex-col bg-boom-ink shadow-2xl transition-transform duration-300 ease-out lg:hidden ${
+        className={`fixed right-0 top-0 z-[60] flex h-full w-[min(100%,350px)] flex-col bg-boom-ink shadow-2xl transition-transform duration-300 ease-out lg:hidden ${
           open ? "translate-x-0" : "pointer-events-none translate-x-full"
         }`}
         role="dialog"
@@ -49,7 +49,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
         inert={!open}
         aria-label="Menú de navegación"
       >
-        <div className="flex items-center justify-between border-b border-white/10 px-6 py-5">
+        <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
           <div className="flex items-center gap-3">
             <span className="relative h-12 w-12 overflow-hidden rounded-full bg-boom-lavender">
               <Image
@@ -87,7 +87,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
           </button>
         </div>
 
-        <nav className="flex flex-1 flex-col gap-6 overflow-y-auto px-6 py-8">
+        <nav className="flex flex-1 flex-col gap-5 overflow-y-auto px-5 py-6">
           {siteConfig.nav.links.map((link) => (
             <NavDropdown
               key={link.href}
@@ -98,8 +98,8 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
           ))}
         </nav>
 
-        <div className="paper-noise border-t border-white/10 bg-boom-lavender p-6 text-boom-ink">
-          <p className="font-display text-2xl font-extrabold uppercase leading-none">
+        <div className="paper-noise border-t border-white/10 bg-boom-lavender p-5 text-boom-ink">
+          <p className="font-display text-2xl font-extrabold leading-none">
             Envuelto en sabor.
           </p>
         </div>

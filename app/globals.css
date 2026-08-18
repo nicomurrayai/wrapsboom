@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-boom-lavender: #d0bfdf;
-  --color-boom-lavender-soft: #eee7f3;
-  --color-boom-lavender-deep: #a78fba;
+  --color-boom-lavender: #d3bfe3;
+  --color-boom-lavender-soft: #f1eaf6;
+  --color-boom-lavender-deep: #9675ae;
   --color-boom-ink: #1a1b3a;
   --color-boom-ink-soft: #292b53;
-  --color-boom-ivory: #f8f4ec;
+  --color-boom-ivory: #fbf8fc;
   --color-boom-white: #ffffff;
 
   --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
@@ -42,23 +42,31 @@
   }
 
   .section-kicker {
-    @apply text-xs font-extrabold uppercase tracking-[0.2em];
+    @apply text-[0.68rem] font-extrabold uppercase tracking-[0.17em];
+  }
+
+  .section-title {
+    @apply mt-3 font-display text-[clamp(2.55rem,4.8vw,4.85rem)] font-bold leading-[0.94] tracking-[-0.045em] text-balance;
+  }
+
+  .section-shell {
+    @apply px-4 py-14 sm:px-6 md:py-20 lg:py-24;
   }
 
   .button-primary {
-    @apply inline-flex min-h-12 items-center justify-center rounded-full bg-boom-ink px-7 text-sm font-extrabold uppercase tracking-[0.12em] text-white transition duration-300 hover:-translate-y-0.5 hover:bg-boom-ink-soft;
+    @apply inline-flex min-h-11 items-center justify-center rounded-full bg-boom-ink px-5 text-[0.8rem] font-extrabold tracking-[0.025em] text-white shadow-[0_8px_20px_rgba(26,27,58,0.16)] transition duration-300 hover:-translate-y-0.5 hover:bg-boom-ink-soft hover:shadow-[0_12px_28px_rgba(26,27,58,0.22)];
   }
 
   .button-lavender {
-    @apply inline-flex min-h-12 items-center justify-center rounded-full bg-boom-lavender px-7 text-sm font-extrabold uppercase tracking-[0.12em] text-boom-ink transition duration-300 hover:-translate-y-0.5 hover:bg-white;
+    @apply inline-flex min-h-11 items-center justify-center rounded-full bg-boom-lavender px-5 text-[0.8rem] font-extrabold tracking-[0.025em] text-boom-ink shadow-[0_8px_20px_rgba(0,0,0,0.12)] transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_12px_26px_rgba(0,0,0,0.16)];
   }
 
   .button-outline-light {
-    @apply inline-flex min-h-12 items-center justify-center rounded-full border border-white/35 px-7 text-sm font-extrabold uppercase tracking-[0.12em] text-white transition duration-300 hover:-translate-y-0.5 hover:border-white hover:bg-white hover:text-boom-ink;
+    @apply inline-flex min-h-11 items-center justify-center rounded-full border border-white/32 px-5 text-[0.8rem] font-extrabold tracking-[0.025em] text-white transition duration-300 hover:-translate-y-0.5 hover:border-white hover:bg-white hover:text-boom-ink;
   }
 
   .form-input {
-    @apply h-12 w-full rounded-xl border border-white/18 bg-white/[0.07] px-4 text-sm text-white outline-none transition placeholder:text-white/38 focus:border-boom-lavender focus:bg-white/[0.1];
+    @apply h-11 w-full rounded-xl border border-white/18 bg-white/[0.07] px-4 text-sm text-white outline-none transition placeholder:text-white/38 focus:border-boom-lavender focus:bg-white/[0.1];
   }
 
   .form-textarea {
@@ -78,6 +86,32 @@
 
   .paper-noise {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.07'/%3E%3C/svg%3E");
+  }
+
+  .silhouette-field {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .silhouette-field::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      url("data:image/svg+xml,%3Csvg width='520' height='420' viewBox='0 0 520 420' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%231a1b3a' stroke-width='18' opacity='.055'%3E%3Cpath d='M-40 158C74 22 185 26 248 119c54 80 152 94 296-3'/%3E%3Cpath d='M374 278c-72-82-154-72-192-12-37 58 6 126 92 116 63-7 109-52 100-104Z'/%3E%3Cpath d='M88 286c40-64 93-88 159-71-24 64-74 95-159 71Z'/%3E%3C/g%3E%3C/svg%3E"),
+      radial-gradient(circle at 82% 18%, rgb(255 255 255 / 0.22) 0 8%, transparent 8.3%);
+    background-position: left -110px top 4%, right -110px bottom 12%;
+    background-repeat: no-repeat;
+    background-size: 520px 420px, 430px 430px;
+  }
+
+  .silhouette-field-dark::before {
+    background-image:
+      url("data:image/svg+xml,%3Csvg width='560' height='460' viewBox='0 0 560 460' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23d3bfe3' stroke-width='18' opacity='.09'%3E%3Cpath d='M-35 112c145-72 249-46 301 55 46 90 137 111 322 19'/%3E%3Cpath d='M423 288c-86-74-171-51-196 17-24 66 35 121 119 88 61-24 96-72 77-105Z'/%3E%3Cpath d='M70 353c56-79 126-98 207-56-46 70-115 89-207 56Z'/%3E%3C/g%3E%3C/svg%3E");
+    background-position: right -120px center;
+    background-size: 560px 460px;
   }
 }
 
@@ -102,6 +136,11 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes soft-float {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-2deg); }
+  50% { transform: translate3d(0, -8px, 0) rotate(1deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {

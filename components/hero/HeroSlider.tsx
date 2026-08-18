@@ -65,7 +65,7 @@ export function HeroSlider() {
 
   return (
     <section
-      className="relative min-h-[740px] w-full overflow-hidden bg-boom-lavender"
+      className="relative min-h-[620px] w-full overflow-hidden bg-boom-lavender sm:min-h-[650px] lg:min-h-[680px]"
       aria-label="Propuestas destacadas de Wrap Boom"
       aria-roledescription="carrusel"
       tabIndex={0}

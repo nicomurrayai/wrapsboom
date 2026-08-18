@@ -6,11 +6,11 @@ export function OrderFab() {
       href={siteConfig.orderUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-4 right-4 z-40 flex items-center gap-2 rounded-full border border-white/20 bg-boom-ink px-4 py-3 text-white shadow-[0_14px_35px_rgba(26,27,58,0.34)] transition duration-300 hover:-translate-y-1 hover:bg-boom-ink-soft sm:bottom-6 sm:right-6 sm:px-5 sm:py-3.5"
+      className="fixed bottom-4 right-4 z-40 flex items-center gap-2 rounded-full border border-white/20 bg-boom-ink px-4 py-2.5 text-white shadow-[0_12px_30px_rgba(26,27,58,0.3)] transition duration-300 hover:-translate-y-1 hover:bg-boom-ink-soft sm:bottom-6 sm:right-6 sm:px-4.5 sm:py-3"
       aria-label="Abrir la carta online de Wrap Boom"
     >
       <OrderIcon />
-      <span className="text-xs font-extrabold uppercase tracking-[0.12em] sm:text-sm">
+      <span className="text-xs font-extrabold tracking-[0.025em] sm:text-[0.8rem]">
         Pedí online
       </span>
     </a>

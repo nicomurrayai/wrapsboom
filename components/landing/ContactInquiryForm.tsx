@@ -64,8 +64,8 @@ export function ContactInquiryForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-      <div className="grid gap-4 sm:grid-cols-2">
+    <form onSubmit={handleSubmit} className="space-y-3.5" noValidate>
+      <div className="grid gap-3.5 sm:grid-cols-2">
         <Field label="Nombre" htmlFor="contact-name">
           <input
             id="contact-name"
@@ -133,7 +133,7 @@ export function ContactInquiryForm() {
           required
           minLength={10}
           maxLength={1200}
-          rows={5}
+          rows={4}
           className="form-textarea"
           placeholder="Contanos si tenés una consulta, un pedido especial o querés recibir información comercial."
         />
@@ -189,7 +189,7 @@ function Field({
 }) {
   return (
     <label htmlFor={htmlFor} className="block">
-      <span className="mb-2 block text-xs font-extrabold uppercase tracking-[0.18em] text-white/58">
+      <span className="mb-1.5 block text-[0.68rem] font-extrabold uppercase tracking-[0.14em] text-white/58">
         {label}
       </span>
       {children}

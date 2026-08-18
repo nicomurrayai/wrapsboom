@@ -14,9 +14,9 @@ export function Navbar() {
 
   return (
     <>
-      <header className="fixed top-0 z-50 w-full px-3 pt-3 sm:px-5 sm:pt-4">
+      <header className="fixed top-0 z-50 w-full px-3 pt-3 sm:px-5">
         <nav
-          className={`mx-auto flex max-w-7xl items-center justify-between rounded-[1.35rem] border px-3 py-2.5 backdrop-blur-xl transition-all duration-300 sm:px-4 ${
+          className={`mx-auto flex max-w-7xl items-center justify-between rounded-[1.2rem] border px-3 py-2 backdrop-blur-xl transition-all duration-300 sm:px-3.5 ${
             scrolled
               ? "border-white/12 bg-boom-ink/94 shadow-[0_14px_50px_rgba(26,27,58,0.25)]"
               : "border-white/15 bg-boom-ink/82"
@@ -28,7 +28,7 @@ export function Navbar() {
             className="relative z-10 flex shrink-0 items-center gap-3"
             aria-label="Wrap Boom, inicio"
           >
-            <span className="relative h-14 w-14 overflow-hidden rounded-full bg-boom-lavender shadow-[0_8px_25px_rgba(0,0,0,0.22)] sm:h-16 sm:w-16">
+            <span className="relative h-12 w-12 overflow-hidden rounded-full bg-boom-lavender shadow-[0_7px_20px_rgba(0,0,0,0.2)] sm:h-14 sm:w-14">
               <Image
                 src={siteConfig.brand.logoSrc}
                 alt={siteConfig.brand.name}
@@ -38,12 +38,12 @@ export function Navbar() {
                 priority
               />
             </span>
-            <span className="hidden font-display text-lg font-extrabold uppercase tracking-[-0.03em] text-white sm:block">
+            <span className="hidden font-display text-base font-extrabold tracking-[-0.025em] text-white sm:block">
               Wrap Boom
             </span>
           </Link>
 
-          <div className="hidden items-center gap-6 lg:flex">
+          <div className="hidden items-center gap-5 lg:flex">
             {siteConfig.nav.links.map((link) => (
               <NavDropdown key={link.href} link={link} />
             ))}

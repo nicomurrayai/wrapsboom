@@ -87,34 +87,34 @@ export function WrapBoomLanding({ menuData, error }: WrapBoomLandingProps) {
 
 function BrandIntro({ productCount }: { productCount: number }) {
   return (
-    <section className="paper-noise relative isolate overflow-hidden bg-boom-lavender px-4 py-20 text-boom-ink sm:px-6 md:py-28">
+    <section className="paper-noise silhouette-field section-shell overflow-hidden bg-boom-lavender text-boom-ink">
       <div
-        className="absolute -right-24 -top-24 h-80 w-80 rounded-full border-[54px] border-boom-ink/[0.055]"
+        className="absolute -right-20 -top-20 h-56 w-56 animate-[soft-float_8s_ease-in-out_infinite] rounded-full border-[34px] border-boom-ink/[0.055]"
         aria-hidden="true"
       />
       <div
-        className="absolute -bottom-28 -left-28 h-72 w-72 rounded-full border-[42px] border-white/28"
+        className="absolute -bottom-24 -left-24 h-56 w-56 rounded-full border-[32px] border-white/24"
         aria-hidden="true"
       />
 
-      <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+      <div className="relative z-10 mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-end">
         <div>
           <p className="section-kicker text-boom-ink/62">Somos Wrap Boom</p>
-          <h2 className="mt-5 max-w-3xl font-display text-[clamp(3.5rem,8vw,7.5rem)] font-extrabold uppercase leading-[0.82] tracking-[-0.065em] text-balance">
+          <h2 className="section-title max-w-3xl text-[clamp(2.8rem,5.3vw,5.2rem)]">
             Fresco, práctico y bien Boom.
           </h2>
         </div>
 
         <div className="max-w-2xl lg:ml-auto">
-          <p className="text-xl font-semibold leading-8 sm:text-2xl sm:leading-9">
+          <p className="text-lg font-semibold leading-7 sm:text-xl sm:leading-8">
             Wraps abundantes, ensaladas con color y combos pensados para comer
             rico sin complicarte.
           </p>
-          <p className="mt-5 max-w-xl text-base leading-7 text-boom-ink/64">
+          <p className="mt-3 max-w-xl text-[0.95rem] leading-6 text-boom-ink/64">
             Ingredientes que se ven, sabores que se entienden y una carta lista
             para acompañarte cuando aparece el hambre.
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-6 flex flex-col gap-2.5 sm:flex-row">
             <a href="#menu" className="button-primary">
               Explorar la carta
             </a>
@@ -122,12 +122,12 @@ function BrandIntro({ productCount }: { productCount: number }) {
               href={LACARTA_MENU_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-12 items-center justify-center rounded-full border border-boom-ink/28 px-7 text-sm font-extrabold uppercase tracking-[0.12em] text-boom-ink transition hover:bg-white/55"
+              className="inline-flex min-h-11 items-center justify-center rounded-full border border-boom-ink/24 px-5 text-[0.8rem] font-extrabold tracking-[0.025em] text-boom-ink transition hover:-translate-y-0.5 hover:bg-white/55"
             >
               Pedí online
             </a>
           </div>
-          <p className="mt-6 text-xs font-extrabold uppercase tracking-[0.2em] text-boom-ink/46">
+          <p className="mt-4 text-[0.68rem] font-extrabold uppercase tracking-[0.15em] text-boom-ink/46">
             {productCount > 0
               ? `${productCount} opciones disponibles hoy`
               : "Carta online disponible"}
@@ -140,18 +140,18 @@ function BrandIntro({ productCount }: { productCount: number }) {
 
 function FeaturedCategories() {
   return (
-    <section className="bg-boom-ink px-4 py-20 text-white sm:px-6 md:py-28">
-      <div className="mx-auto max-w-7xl">
+    <section className="silhouette-field silhouette-field-dark section-shell overflow-hidden bg-boom-ink text-white">
+      <div className="relative z-10 mx-auto max-w-7xl">
         <div className="max-w-3xl">
           <p className="section-kicker text-boom-lavender">
             Elegí tu momento
           </p>
-          <h2 className="mt-5 font-display text-[clamp(3rem,6vw,6rem)] font-extrabold uppercase leading-[0.86] tracking-[-0.055em] text-balance">
+          <h2 className="section-title text-white">
             Hay un Boom para cada antojo.
           </h2>
         </div>
 
-        <div className="mt-12 grid gap-4 lg:grid-cols-12">
+        <div className="mt-8 grid gap-4 lg:grid-cols-12">
           {featuredCategories.map((category) => (
             <FeaturedCategoryCard key={category.title} {...category} />
           ))}
@@ -172,30 +172,30 @@ function FeaturedCategoryCard({
 }: (typeof featuredCategories)[number]) {
   return (
     <article
-      className={`group relative min-h-[440px] overflow-hidden rounded-[1.75rem] border border-white/12 bg-boom-lavender ${className}`}
+      className={`group relative min-h-[360px] overflow-hidden rounded-[1.5rem] border border-white/12 bg-boom-lavender shadow-[0_16px_40px_rgba(0,0,0,0.18)] transition duration-300 hover:-translate-y-1 ${className}`}
     >
       <Image
         src={image}
         alt=""
         fill
         sizes="(max-width: 1024px) 100vw, 50vw"
-        className={`object-cover transition duration-700 group-hover:scale-[1.035] ${imageClassName}`}
+        className={`object-cover transition duration-700 group-hover:scale-[1.045] ${imageClassName}`}
       />
       <div
-        className="absolute inset-x-0 bottom-0 h-[58%] bg-boom-ink/88"
+        className="absolute inset-x-0 bottom-0 h-[62%] bg-gradient-to-t from-boom-ink via-boom-ink/88 to-transparent"
         aria-hidden="true"
       />
-      <div className="relative z-10 flex min-h-[440px] flex-col justify-end p-6 sm:p-8">
+      <div className="relative z-10 flex min-h-[360px] flex-col justify-end p-5 sm:min-h-[390px] sm:p-6">
         <p className="section-kicker text-boom-lavender">{label}</p>
-        <h3 className="mt-3 font-display text-5xl font-extrabold uppercase leading-none tracking-[-0.045em]">
+        <h3 className="mt-2 font-display text-4xl font-bold leading-none tracking-[-0.035em]">
           {title}
         </h3>
-        <p className="mt-3 max-w-sm text-sm font-medium leading-6 text-white/72">
+        <p className="mt-2 max-w-sm text-sm font-medium leading-6 text-white/72">
           {copy}
         </p>
         <a
           href={href}
-          className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-boom-lavender px-5 py-3 text-xs font-extrabold uppercase tracking-[0.12em] text-boom-ink transition hover:bg-white"
+          className="mt-4 inline-flex w-fit items-center gap-2 rounded-full bg-boom-lavender px-4 py-2.5 text-xs font-extrabold tracking-[0.025em] text-boom-ink transition hover:gap-3 hover:bg-white"
         >
           Ver opciones
           <ArrowDownIcon />
@@ -217,19 +217,19 @@ function ProductMenu({
   return (
     <section
       id="menu"
-      className="scroll-mt-24 bg-boom-ivory px-4 py-20 text-boom-ink sm:px-6 md:py-28"
+      className="silhouette-field section-shell scroll-mt-24 overflow-hidden bg-boom-ivory text-boom-ink"
     >
-      <div className="mx-auto max-w-7xl">
-        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+      <div className="relative z-10 mx-auto max-w-7xl">
+        <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
           <div>
             <p className="section-kicker text-boom-lavender-deep">
               La carta completa
             </p>
-            <h2 className="mt-5 font-display text-[clamp(3.25rem,6vw,6rem)] font-extrabold uppercase leading-[0.86] tracking-[-0.06em] text-balance">
+            <h2 className="section-title">
               Elegí sin vueltas.
             </h2>
           </div>
-          <p className="max-w-2xl text-lg font-medium leading-8 text-boom-ink/62 lg:ml-auto">
+          <p className="max-w-2xl text-base font-medium leading-7 text-boom-ink/62 lg:ml-auto">
             Navegá por categorías y encontrá wraps, ensaladas, combos, postres,
             salsas y bebidas. Los productos y precios se actualizan directamente
             desde nuestra carta.
@@ -243,33 +243,33 @@ function ProductMenu({
         ) : (
           <>
             <nav
-              className="mt-10 flex gap-2 overflow-x-auto pb-4"
+              className="mt-7 flex gap-2 overflow-x-auto pb-3"
               aria-label="Categorías de la carta"
             >
               {groups.map((group) => (
                 <a
                   key={group.category}
                   href={`#${group.id}`}
-                  className="shrink-0 rounded-full border border-boom-ink/12 bg-white px-4 py-2.5 text-xs font-extrabold uppercase tracking-[0.1em] text-boom-ink/68 transition hover:border-boom-ink hover:bg-boom-lavender hover:text-boom-ink"
+                  className="shrink-0 rounded-full border border-boom-ink/12 bg-white/85 px-4 py-2 text-xs font-extrabold tracking-[0.02em] text-boom-ink/68 shadow-sm transition hover:-translate-y-0.5 hover:border-boom-ink/30 hover:bg-boom-lavender hover:text-boom-ink"
                 >
                   {group.category}
                 </a>
               ))}
             </nav>
 
-            <div className="mt-10 space-y-20">
+            <div className="mt-8 space-y-14 md:space-y-16">
               {groups.map((group) => (
                 <section
                   key={group.category}
                   id={group.id}
                   className="content-auto scroll-mt-28"
                 >
-                  <div className="mb-7 flex flex-col gap-4 border-b border-boom-ink/12 pb-5 sm:flex-row sm:items-end sm:justify-between">
+                  <div className="mb-5 flex flex-col gap-3 border-b border-boom-ink/10 pb-4 sm:flex-row sm:items-end sm:justify-between">
                     <div>
                       <p className="section-kicker text-boom-lavender-deep">
                         {group.products.length} opciones
                       </p>
-                      <h3 className="mt-2 font-display text-4xl font-extrabold uppercase leading-none tracking-[-0.04em] sm:text-5xl">
+                      <h3 className="mt-1.5 font-display text-3xl font-bold leading-none tracking-[-0.035em] sm:text-4xl">
                         {group.category}
                       </h3>
                     </div>
@@ -282,7 +282,7 @@ function ProductMenu({
                       Pedir
                     </a>
                   </div>
-                  <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     {group.products.map((product) => (
                       <ProductCard key={product._id} product={product} />
                     ))}
@@ -301,19 +301,19 @@ function ProductCard({ product }: { product: LacartaProduct }) {
   const imageSrc = getProductImage(product);
 
   return (
-    <article className="group overflow-hidden rounded-[1.4rem] border border-boom-ink/10 bg-white shadow-[0_18px_45px_rgba(26,27,58,0.07)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_55px_rgba(26,27,58,0.13)]">
+    <article className="group overflow-hidden rounded-[1.25rem] border border-boom-ink/10 bg-white/95 shadow-[0_10px_28px_rgba(26,27,58,0.065)] transition duration-300 hover:-translate-y-1 hover:border-boom-lavender-deep/35 hover:shadow-[0_18px_38px_rgba(26,27,58,0.12)]">
       <ProductMedia src={imageSrc} alt={product.name} />
 
-      <div className="p-5">
+      <div className="p-4">
         <div className="flex items-start justify-between gap-3">
-          <h4 className="text-lg font-extrabold leading-tight text-boom-ink">
+          <h4 className="text-base font-extrabold leading-snug text-boom-ink">
             {product.name}
           </h4>
-          <p className="shrink-0 rounded-full bg-boom-lavender px-3 py-1.5 text-sm font-extrabold text-boom-ink">
+          <p className="shrink-0 rounded-full bg-boom-lavender px-2.5 py-1 text-[0.8rem] font-extrabold text-boom-ink">
             {priceFormatter.format(product.price)}
           </p>
         </div>
-        <p className="mt-3 line-clamp-3 min-h-[4.5rem] text-sm leading-6 text-boom-ink/58">
+        <p className="mt-2 line-clamp-3 min-h-[3.9rem] text-[0.82rem] leading-[1.3rem] text-boom-ink/58">
           {product.description?.trim() ||
             "Preparado con el sello fresco y sabroso de Wrap Boom."}
         </p>
@@ -344,34 +344,33 @@ function BenefitsSection() {
   return (
     <section
       id="beneficios"
-      className="scroll-mt-24 overflow-hidden bg-boom-ink px-4 py-20 text-white sm:px-6 md:py-28"
+      className="silhouette-field silhouette-field-dark section-shell scroll-mt-24 overflow-hidden bg-boom-ink text-white"
     >
-      <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[0.8fr_1.2fr]">
+      <div className="relative z-10 mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-12">
         <div>
           <p className="section-kicker text-boom-lavender">La propuesta</p>
-          <h2 className="mt-5 font-display text-[clamp(3.4rem,6vw,6.4rem)] font-extrabold uppercase leading-[0.84] tracking-[-0.06em] text-balance">
+          <h2 className="section-title text-white">
             Comer rico también puede ser fácil.
           </h2>
-          <div
-            className="mt-10 h-52 w-52 rounded-full border-[34px] border-boom-lavender/16 sm:h-64 sm:w-64"
-            aria-hidden="true"
-          />
+          <div className="mt-7 inline-flex rotate-[-3deg] rounded-full border border-boom-lavender/20 bg-boom-lavender/10 px-4 py-2 text-xs font-extrabold text-boom-lavender">
+            Rico · fresco · sin vueltas
+          </div>
         </div>
 
         <div className="divide-y divide-white/12 border-y border-white/12">
           {benefits.map((benefit) => (
             <article
               key={benefit.number}
-              className="grid gap-5 py-8 sm:grid-cols-[84px_1fr] sm:py-10"
+              className="grid gap-3 py-5 sm:grid-cols-[64px_1fr] sm:gap-5 sm:py-6"
             >
-              <p className="font-display text-2xl font-extrabold text-boom-lavender">
+              <p className="font-display text-lg font-extrabold text-boom-lavender">
                 {benefit.number}
               </p>
               <div>
-                <h3 className="font-display text-3xl font-extrabold uppercase tracking-[-0.035em] sm:text-4xl">
+                <h3 className="font-display text-2xl font-bold tracking-[-0.025em] sm:text-3xl">
                   {benefit.title}
                 </h3>
-                <p className="mt-3 max-w-xl text-base leading-7 text-white/62">
+                <p className="mt-2 max-w-xl text-sm leading-6 text-white/62">
                   {benefit.copy}
                 </p>
               </div>
@@ -387,10 +386,10 @@ function DeliverySection({ phoneNumber }: { phoneNumber: string | null }) {
   return (
     <section
       id="delivery"
-      className="paper-noise scroll-mt-24 bg-boom-lavender px-4 py-20 text-boom-ink sm:px-6 md:py-28"
+      className="paper-noise silhouette-field section-shell scroll-mt-24 overflow-hidden bg-boom-lavender text-boom-ink"
     >
-      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-        <div className="relative min-h-[430px] overflow-hidden rounded-[2rem] border border-boom-ink/10 bg-boom-lavender-soft shadow-[0_24px_65px_rgba(26,27,58,0.13)] sm:min-h-[560px]">
+      <div className="relative z-10 mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.03fr_0.97fr] lg:items-center">
+        <div className="relative min-h-[340px] overflow-hidden rounded-[1.6rem] border border-boom-ink/10 bg-boom-lavender-soft shadow-[0_18px_48px_rgba(26,27,58,0.12)] sm:min-h-[440px] lg:min-h-[500px]">
           <Image
             src={campaignAssets.delivery}
             alt="Wraps listos para pedir por delivery"
@@ -400,23 +399,23 @@ function DeliverySection({ phoneNumber }: { phoneNumber: string | null }) {
           />
         </div>
 
-        <div className="lg:pl-8">
+        <div className="lg:pl-5">
           <p className="section-kicker text-boom-ink/58">Delivery y take away</p>
-          <h2 className="mt-5 font-display text-[clamp(3.5rem,6vw,6.5rem)] font-extrabold uppercase leading-[0.84] tracking-[-0.06em] text-balance">
+          <h2 className="section-title">
             Pedí fácil. Comé rico.
           </h2>
-          <p className="mt-6 max-w-xl text-lg font-medium leading-8 text-boom-ink/66">
+          <p className="mt-4 max-w-xl text-base font-medium leading-7 text-boom-ink/66">
             Entrá a la carta, elegí tus favoritos y armá tu pedido con los
             productos y precios siempre actualizados.
           </p>
 
-          <div className="mt-8 grid gap-3 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+          <div className="mt-6 grid gap-2.5 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
             <OrderStep number="1" label="Explorá" />
             <OrderStep number="2" label="Elegí" />
             <OrderStep number="3" label="Disfrutá" />
           </div>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-6 flex flex-col gap-2.5 sm:flex-row">
             <a
               href={LACARTA_MENU_URL}
               target="_blank"
@@ -428,7 +427,7 @@ function DeliverySection({ phoneNumber }: { phoneNumber: string | null }) {
             {phoneNumber ? (
               <a
                 href={`tel:+${digitsOnly(phoneNumber)}`}
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-boom-ink/24 px-6 text-sm font-extrabold uppercase tracking-[0.1em] transition hover:bg-white/50"
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-boom-ink/24 px-5 text-[0.8rem] font-extrabold tracking-[0.025em] transition hover:-translate-y-0.5 hover:bg-white/50"
               >
                 <PhoneIcon />
                 {formatPhone(phoneNumber)}
@@ -436,7 +435,7 @@ function DeliverySection({ phoneNumber }: { phoneNumber: string | null }) {
             ) : null}
           </div>
 
-          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+          <div className="mt-6 grid gap-2.5 sm:grid-cols-2">
             <InfoTile label="Lunes a jueves" value="11 a 23 hs" />
             <InfoTile label="Viernes a domingo" value="11 a 23:30 hs" />
             <InfoTile label="Feriados" value="11 a 23:30 hs" />
@@ -449,11 +448,11 @@ function DeliverySection({ phoneNumber }: { phoneNumber: string | null }) {
 
 function InfoTile({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl border border-boom-ink/12 bg-white/36 p-4">
+    <div className="rounded-[1.1rem] border border-boom-ink/10 bg-white/38 p-3.5 transition hover:bg-white/55">
       <p className="text-xs font-extrabold uppercase tracking-[0.15em] text-boom-ink/62">
         {label}
       </p>
-      <p className="mt-2 text-lg font-extrabold leading-tight text-boom-ink">
+      <p className="mt-1.5 text-base font-extrabold leading-tight text-boom-ink">
         {value}
       </p>
     </div>
@@ -462,9 +461,9 @@ function InfoTile({ label, value }: { label: string; value: string }) {
 
 function OrderStep({ number, label }: { number: string; label: string }) {
   return (
-    <div className="rounded-2xl border border-boom-ink/12 bg-white/36 p-4">
-      <p className="font-display text-2xl font-extrabold">{number.padStart(2, "0")}</p>
-      <p className="mt-2 text-xs font-extrabold uppercase tracking-[0.15em] text-boom-ink/62">
+    <div className="rounded-[1.1rem] border border-boom-ink/10 bg-white/38 p-3.5 transition hover:-translate-y-0.5 hover:bg-white/55">
+      <p className="font-display text-xl font-extrabold">{number.padStart(2, "0")}</p>
+      <p className="mt-1.5 text-xs font-extrabold uppercase tracking-[0.13em] text-boom-ink/62">
         {label}
       </p>
     </div>
@@ -475,20 +474,20 @@ function ContactFooter({ phoneNumber }: { phoneNumber: string | null }) {
   return (
     <section
       id="contacto"
-      className="scroll-mt-24 bg-[#11122a] px-4 py-20 text-white sm:px-6 md:py-28"
+      className="silhouette-field silhouette-field-dark section-shell scroll-mt-24 overflow-hidden bg-[#11122a] text-white"
     >
-      <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
+      <div className="relative z-10 mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-start lg:gap-10">
         <div>
           <p className="section-kicker text-boom-lavender">Contacto</p>
-          <h2 className="mt-5 font-display text-[clamp(3.5rem,6vw,6.4rem)] font-extrabold uppercase leading-[0.84] tracking-[-0.06em] text-balance">
+          <h2 className="section-title text-white">
             Hablemos de tu próximo Boom.
           </h2>
-          <p className="mt-6 max-w-xl text-lg leading-8 text-white/64">
+          <p className="mt-4 max-w-xl text-base leading-7 text-white/64">
             Consultas generales, pedidos especiales o información comercial.
             Dejanos tus datos y te respondemos a la brevedad.
           </p>
 
-          <div className="mt-9">
+          <div className="mt-6">
             <p className="section-kicker text-white/42">Horarios</p>
             <p className="mt-3 text-sm leading-7 text-white/64">
               Lunes a jueves de 11 a 23 hs.
@@ -498,7 +497,7 @@ function ContactFooter({ phoneNumber }: { phoneNumber: string | null }) {
           </div>
 
           {phoneNumber ? (
-            <div className="mt-9">
+            <div className="mt-6">
               <p className="section-kicker text-white/42">Teléfono</p>
               <a
                 href={`tel:+${digitsOnly(phoneNumber)}`}
@@ -511,14 +510,14 @@ function ContactFooter({ phoneNumber }: { phoneNumber: string | null }) {
           ) : null}
         </div>
 
-        <div className="rounded-[1.75rem] border border-white/10 bg-white/[0.045] p-5 shadow-[0_28px_90px_rgba(0,0,0,0.3)] sm:p-8">
+        <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.055] p-5 shadow-[0_22px_65px_rgba(0,0,0,0.24)] backdrop-blur-sm sm:p-6">
           <ContactInquiryForm />
         </div>
       </div>
 
-      <footer className="mx-auto mt-16 flex max-w-7xl flex-col gap-6 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
+      <footer className="relative z-10 mx-auto mt-10 flex max-w-7xl flex-col gap-5 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-4">
-          <span className="relative h-14 w-14 overflow-hidden rounded-full bg-boom-lavender">
+          <span className="relative h-12 w-12 overflow-hidden rounded-full bg-boom-lavender">
             <Image
               src="/logo.png"
               alt=""
@@ -528,7 +527,7 @@ function ContactFooter({ phoneNumber }: { phoneNumber: string | null }) {
             />
           </span>
           <div>
-            <p className="font-display text-2xl font-extrabold uppercase">
+            <p className="font-display text-xl font-extrabold">
               Wrap Boom
             </p>
             <p className="mt-1 text-xs font-bold uppercase tracking-[0.16em] text-white/42">
@@ -551,8 +550,8 @@ function ContactFooter({ phoneNumber }: { phoneNumber: string | null }) {
 
 function MenuError() {
   return (
-    <div className="mt-12 rounded-[1.5rem] border border-boom-ink/12 bg-boom-lavender-soft p-7 sm:p-9">
-      <p className="font-display text-3xl font-extrabold uppercase tracking-[-0.035em]">
+    <div className="mt-8 rounded-[1.35rem] border border-boom-ink/12 bg-boom-lavender-soft p-6 sm:p-7">
+      <p className="font-display text-2xl font-bold tracking-[-0.025em]">
         La carta se está actualizando.
       </p>
       <p className="mt-3 max-w-xl text-sm leading-6 text-boom-ink/62">
@@ -573,8 +572,8 @@ function MenuError() {
 
 function EmptyMenu() {
   return (
-    <div className="mt-12 rounded-[1.5rem] border border-boom-ink/12 bg-white p-7 sm:p-9">
-      <p className="font-display text-3xl font-extrabold uppercase tracking-[-0.035em]">
+    <div className="mt-8 rounded-[1.35rem] border border-boom-ink/12 bg-white p-6 sm:p-7">
+      <p className="font-display text-2xl font-bold tracking-[-0.025em]">
         No hay productos disponibles.
       </p>
       <p className="mt-3 max-w-xl text-sm leading-6 text-boom-ink/62">
